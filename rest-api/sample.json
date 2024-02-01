@@ -1,0 +1,27 @@
+{
+  "key" : "value",
+
+  "array" : [
+    10,
+    20,
+    30
+  ],
+
+  "string_arr": [
+    "홍길동","나길동","다길동"
+  ],
+
+  "object_arr": [
+    {
+      "name": "Hong Gil Dong"
+    },
+    {
+      "name": "Gwon Ju Ly"
+    }
+  ],
+
+}
+1. snake case
+-로 구분: user_name
+2. camel case
+소문자 대문자로 구문: userName
