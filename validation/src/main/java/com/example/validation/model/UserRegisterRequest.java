@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class UserRegisterRequest {
 
-    @NotNull //!=null
-    @NotEmpty //!=null && !="", 공백도 아님
+   // @NotNull //!=null
+   // @NotEmpty //!=null && !="", 공백도 아님
     @NotBlank //!=null && !="" && !=" " //blank가 있는 문자도 안됨
     private String name;
 
@@ -32,7 +32,10 @@ public class UserRegisterRequest {
     @Email //email 포맷이 들어오도록
     private String email;
 
-    //강의 정규식 참고
-   private String phoneNumber;
+    //@Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}$")
+    @Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}$", message="휴대번호 양식에 맞지 않습니다.")//default message [휴대번호 양식에 맞지 않습니다.]]
+    private String phoneNumber;
+
+   @FutureOrPresent//오늘(현재) 이상을 뜻 함
     private LocalDateTime registerAt;
 }
