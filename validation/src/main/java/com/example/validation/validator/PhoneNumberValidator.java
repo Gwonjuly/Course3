@@ -23,7 +23,7 @@ validation이 실행될 때 밑에 isValid 메서드가 실행 됨 value에 phon
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        boolean result= Pattern.matches(value,regexp);//phoneNumber와 regexp(정규식)과 일치하는지 확인
+        boolean result= Pattern.matches(regexp,value);//phoneNumber와 regexp(정규식)과 일치하는지 확인(순서  바뀜)
         return result;
     }
 }
