@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 /*
-Repositoryf를 상속받는 인터페이스
+Repository를 상속받는 인터페이스
 CRUD 기능을 가짐
  */
 public interface DataRepository<T,ID> extends Repository<T,ID> {
