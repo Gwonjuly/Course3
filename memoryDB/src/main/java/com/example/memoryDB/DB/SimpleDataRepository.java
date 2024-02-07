@@ -2,10 +2,8 @@ package com.example.memoryDB.DB;
 
 import com.example.memoryDB.Entity.Entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /*
 DataRepository를  구현 또는 미 구현 하는 추상 클래스
@@ -16,6 +14,20 @@ public abstract class SimpleDataRepository<T extends Entity,ID extends Long> imp
 
     //고유 id 부여를 위함(0부터 시작)
     private static long index=0;
+
+    //sorting
+    private Comparator<T> sort=new Comparator<T>() {
+        @Override
+        public int compare(T o1, T o2) {
+            //사용자 작성
+            return Long.compare(o1.getId(), o2.getId());
+            /*
+            o1 < o2 ==> -1
+            o1 == o2 ==> 0
+            o1 > o2 ==> 1
+             */
+        }
+    };
 
     //create, 데이터가 들어오면 데이터 리스트에 add
     @Override
@@ -60,7 +72,9 @@ public abstract class SimpleDataRepository<T extends Entity,ID extends Long> imp
     }
     @Override
     public List<T> findAll(){
-        return dataList;
+        return dataList.stream()
+                .sorted(sort)
+                .collect(Collectors.toList());
     }
 
     //delete
