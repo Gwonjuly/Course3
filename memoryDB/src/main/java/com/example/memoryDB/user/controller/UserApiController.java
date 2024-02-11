@@ -4,10 +4,7 @@ import com.example.memoryDB.user.model.UserEntity;
 import com.example.memoryDB.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +12,8 @@ import java.util.List;
 컨트롤러 -> 서비스: 요청, 서비스는 비즈니스 로직을 처리(데이터베이스의 repository를 이용하여 특정 데이터 처리
 컨트롤러 <- 서비스: 응답, 서비스는 처리 후 컨트롤러에게 응답을 줌
  */
-@Controller//HTTP 리퀘스트가 들어오는 내용을 처리하고 response를 처리하는 영역
+//@Controller//HTTP 리퀘스트가 들어오는 내용을 처리하고 response를 처리하는 영역
+@RestController//해당 컨트롤러를 REST API로 처리
 @RequestMapping("/api/user")
 @RequiredArgsConstructor//생성자 메서드로 채워달라는 어노테이션(final UserService에 적용되나?)
 public class UserApiController {
