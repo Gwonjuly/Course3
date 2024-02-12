@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service//서비스 로직이 들어가는 빈의 영역, 즉 데이터베이스의 영역임을 표시, 그래서 userApi컨트롤러에서 빈이 자동으로 등록된건가?
 @RequiredArgsConstructor//생성자 메서드로 채워달라는 어노테이션(final UserRepository에 적용되나?)
@@ -22,5 +24,17 @@ public class UserService {
 
     public List<UserEntity> findAll(){
         return userRepository.findAll();//userRepository가 simple을 상속받음 즉, simple의 findAll 함수 호출
+    }
+
+    public void delete(Long id){
+        userRepository.delete(id);
+    }
+
+    public Optional<UserEntity> findById(Long id){
+        return userRepository.findById(id);
+    }
+
+    public List<UserEntity> filterScore(int score){
+        return userRepository.findAllScore(score);
     }
 }

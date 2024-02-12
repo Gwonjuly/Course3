@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /*
 컨트롤러 -> 서비스: 요청, 서비스는 비즈니스 로직을 처리(데이터베이스의 repository를 이용하여 특정 데이터 처리
@@ -33,5 +34,29 @@ public class UserApiController {
     @GetMapping("/all")
     public List<UserEntity> findAll(){
         return userService.findAll();
+    }
+
+    //delete id
+    @DeleteMapping("/id/{id}")
+    public void delete(
+            @PathVariable Long id
+    ){
+        userService.delete(id);
+    }
+    //findById id -> path variable 방식
+    @GetMapping("/id/{id}")
+    public UserEntity findById(
+            @PathVariable Long id
+    ){
+        //return userService.findById(id); 이렇게 하면 UserEntity가 아닌 Optional 이기에 에러남. .get()해주면 에러 안남
+        return userService.findById(id).get();
+    }
+
+    //http://localhost:8080/api/user/score?score=70
+    @GetMapping("/score")//Query Variable
+    public List<UserEntity> filterScore(
+            @RequestParam int  score
+    ){
+        return userService.filterScore(score);
     }
 }
