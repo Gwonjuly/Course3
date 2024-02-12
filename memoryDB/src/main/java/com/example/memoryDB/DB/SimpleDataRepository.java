@@ -45,13 +45,12 @@ public abstract class SimpleDataRepository<T extends Entity,ID extends Long> imp
         //preData가 있는가?
         if(preData.isPresent()){
             //기존 데이터 있음:update
-            //dataList.remove(preData);//preData=Optional<UserEntity>, userEntity와 동일한 객체를 가지고 있는 객체가 list에 없기에 삭제가 되지 않음'
-            dataList.remove(preData.get());//이렇게 해줘야 함
+            dataList.remove(preData);
             dataList.add(data);
         }
         else{
             //기존 데이터 없음: save
-            data.setId(++index); //왜 전위로 하는거지..? 인덱스가 1부터 가나?
+            data.setId(index++); //왜 전위로 하는거지..? 인덱스가 1부터 가나?
             dataList.add(data);
        }
 
@@ -85,6 +84,6 @@ public abstract class SimpleDataRepository<T extends Entity,ID extends Long> imp
                 .filter(it->{return it.getId().equals(id);})
                 .findFirst();
         if(deleteEntity.isPresent())
-            dataList.remove(deleteEntity.get());//여기도 .get()을 해줘야 객체의 인덱스를 찾아 삭제함
+            dataList.remove(deleteEntity);
     }
 }
