@@ -17,7 +17,6 @@ import java.util.List;
 public class UserApiController {
 
     //레파지토리를 스프링으로부터 주입 받을 거임임 @Required~~ 있어야 함
-    @Autowired
     private final UserRepository userRepository;
 
    @GetMapping("/find-all")
