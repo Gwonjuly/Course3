@@ -26,7 +26,7 @@ public class UserService {
         return userRepository.findAll();//userRepository가 simple을 상속받음 즉, simple의 findAll 함수 호출
     }
 
-    public void delete(Long id){
+    public void delete(UserEntity id){
         userRepository.delete(id);
     }
 
@@ -35,6 +35,7 @@ public class UserService {
     }
 
     public List<UserEntity> filterScore(int score){
-        return userRepository.findAllScore(score);
+        return null;
+        //return userRepository.findAllScore(score);
     }
 }
