@@ -1,14 +1,13 @@
 package com.example.jpa.user.controller;
 
-import com.example.jpa.db.UserEntity;
-import com.example.jpa.db.UserRepository;
+import com.example.jpa.user.db.UserEntity;
+import com.example.jpa.user.db.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.processing.Generated;
 import java.util.List;
 
 @RestController
@@ -22,5 +21,20 @@ public class UserApiController {
    @GetMapping("/find-all")
     public List<UserEntity> findAll(){
        return userRepository.findAll();
+    }
+
+
+    /*
+    insert into `user`(
+    `name`)
+    values(
+    'honggildong'); 와 동일
+     */
+    @GetMapping("/name")//Query variale 방식//http://localhost:8080/api/user/name?name=ABCD
+    public void autoSave(@RequestParam String name){
+       var user=UserEntity.builder()
+               .name(name)
+               .build();
+       userRepository.save(user);
     }
 }
