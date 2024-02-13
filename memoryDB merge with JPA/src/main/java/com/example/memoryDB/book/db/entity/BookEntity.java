@@ -15,11 +15,11 @@ import java.math.BigDecimal;
 @Entity(name = "book")
 public class BookEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id//프라이머리 키로 맵핑
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//맵핑 with auto increment=데이터 베이스에서 관리
+    private Long id;//Long mapping with bigint(32)
 
     private String name;
     private String category;
-    private BigDecimal amount;
+    private BigDecimal amount;//mapping with DECIMAL(14,0)
 }
