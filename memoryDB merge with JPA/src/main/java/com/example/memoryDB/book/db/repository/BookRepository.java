@@ -1,9 +1,7 @@
 package com.example.memoryDB.book.db.repository;
 
-import com.example.memoryDB.DB.SimpleDataRepository;
 import com.example.memoryDB.book.db.entity.BookEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Service
-public class BookRepository extends SimpleDataRepository<BookEntity, Long> {
+public interface BookRepository extends JpaRepository<BookEntity, Long> {
 }
