@@ -35,7 +35,14 @@ public class UserService {
     }
 
     public List<UserEntity> filterScore(int score){
-        return null;
-        //return userRepository.findAllScore(score);
+        //return null;
+        return userRepository.findAllByScoreGreaterThan(score);
+    }
+
+    //overloading
+    public List<UserEntity> filterScore(int min, int max){
+        //return userRepository.findAllByScoreGreaterThanEqualAndScoreLessThanEqual(min,max);
+        //[jpql 방식]
+        return userRepository.score(min, max);
     }
 }
