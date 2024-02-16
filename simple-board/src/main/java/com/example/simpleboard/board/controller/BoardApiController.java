@@ -5,9 +5,8 @@ import com.example.simpleboard.board.model.BoardRequest;
 import com.example.simpleboard.board.service.BoardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 /*
 요청을 받기 위해 모델 필요하다고 함-> model.BoardRequest
 컨트롤러는 요청을 누구한테 받을까? 서버?로 부터 들어온 요청이 boardrequest?
@@ -23,9 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class BoardApiController {
 
     private final BoardService boardService;
-    @GetMapping("")
+    @PostMapping("")
     public BoardEntity create(//JpaRepository(simple)의 save
             @Valid
+                    @RequestBody
             BoardRequest boardRequest//요청은 valid를 통해 검증됨(not blank)
     ){
         return boardService.create(boardRequest);
