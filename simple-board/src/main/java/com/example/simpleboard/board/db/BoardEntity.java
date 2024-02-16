@@ -22,7 +22,7 @@ public class BoardEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//primary key 설정
     private Long id;
 
-    private String boardname;
+    private String boardName;
 
     private String status;
 }
