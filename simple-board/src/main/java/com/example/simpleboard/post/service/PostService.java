@@ -42,7 +42,7 @@ public class PostService {
      * @return
      */
     public PostEntity view(PostViewRequest postViewRequest) {
-        return postRepository.findById(postViewRequest.getPostId())//optional
+        return postRepository.findFirstByIdAndStatusOrderByIdDesc(postViewRequest.getPostId(),"REGISTERED")//optional
                 .map(it->{
                     //it: 객체가 존재할 할 때만 map 가능
                     if(!it.getPassword().equals(postViewRequest.getPassword())){//it(글) 있지만 비밀 번호가 맞지 앟을 경우

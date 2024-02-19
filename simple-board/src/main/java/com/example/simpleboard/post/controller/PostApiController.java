@@ -35,7 +35,7 @@ public class PostApiController {
         return postService.view(postViewRequest);//클릭한 게시글과 post_id가 있어야 하고 입력한 비밀번호가 일치해야 함
     }
 
-    @GetMapping("/ali")
+    @GetMapping("/all")
     public List<PostEntity> list(){
         return postService.all();
     }
