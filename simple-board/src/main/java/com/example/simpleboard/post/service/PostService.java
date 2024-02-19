@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 //서비스는 레파지터리를 주입 받아야 함
 @RequiredArgsConstructor
@@ -51,6 +52,25 @@ public class PostService {
                     return it; //it(글) 있고 패스워도 맞는 경우
                 }).orElseThrow(//it(글)가 없는 경우
                         ()->{return new RuntimeException("해당 글이 존재하지 않습니다.:"+postViewRequest.getPostId());}
+                );
+    }
+
+    public List<PostEntity> all() {
+        return postRepository.findAll();
+    }
+
+    public void delete(PostViewRequest postViewRequest) {
+        postRepository.findById(postViewRequest.getPostId())
+                .map(it->{
+                    if(!it.getPassword().equals(postViewRequest.getPassword())){
+                        var format="패스워드가 맞지 않습니다. %s vs %s";
+                        throw new RuntimeException(String.format(format,it.getPassword(),postViewRequest.getPassword()));
+                    }
+                    it.setStatus("UNREGISTERED");
+                    postRepository.save(it);
+                    return it;//map은 return 필수임
+                }).orElseThrow(
+                        ()->{return new RuntimeException("해당 게시글이 존재하지 않습니다."+postViewRequest.getPostId());}
                 );
     }
 }
