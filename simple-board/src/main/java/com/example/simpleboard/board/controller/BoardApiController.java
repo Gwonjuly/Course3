@@ -1,6 +1,7 @@
 package com.example.simpleboard.board.controller;
 
 import com.example.simpleboard.board.db.BoardEntity;
+import com.example.simpleboard.board.model.BoardDto;
 import com.example.simpleboard.board.model.BoardRequest;
 import com.example.simpleboard.board.service.BoardService;
 import jakarta.validation.Valid;
@@ -25,8 +26,8 @@ public class BoardApiController {
 
     private final BoardService boardService;
     @PostMapping("")
-    public BoardEntity create(//JpaRepository(simple)의 save
-            @Valid
+    public BoardDto create(//JpaRepository(simple)의 save
+                           @Valid
                     @RequestBody
             BoardRequest boardRequest//요청은 valid를 통해 검증됨(not blank)
     ){
@@ -34,7 +35,7 @@ public class BoardApiController {
     }
 
     @GetMapping("/id/{id}")
-    public BoardEntity view(
+    public BoardDto view(
             @PathVariable Long id
     ){
         var entity=boardService.view(id);
