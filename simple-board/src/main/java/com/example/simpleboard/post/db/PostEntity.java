@@ -2,6 +2,7 @@ package com.example.simpleboard.post.db;
 
 import com.example.simpleboard.board.db.BoardEntity;
 import com.example.simpleboard.reply.db.ReplyEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,6 +27,7 @@ public class PostEntity {
     private Long id;
 
     @ManyToOne//post는 n이고 boardentity가 1
+    @JsonIgnore//board와 post의 무한루프를 막기 위해 post에서 boardentity 참조 시, 직렬화(객체 -> json)을 막음
     private BoardEntity board;//1:N 관계를 위해 수정, @으로 인해 해당 변수를 컬럼으로 인식, board + _id(뒤에 자동으로 붙음)
 
     private String userName;
