@@ -16,6 +16,8 @@ import lombok.*;
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class PostRequest {
 
+    private Long boardId=1L;//게시글을 작성 시, 어떤 보드에 생성하겠다
+
     @NotBlank
     private String userName;
 

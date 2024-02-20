@@ -1,5 +1,6 @@
 package com.example.simpleboard.post.db;
 
+import com.example.simpleboard.board.db.BoardEntity;
 import com.example.simpleboard.reply.db.ReplyEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,7 +25,8 @@ public class PostEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//primary key 설정
     private Long id;
 
-    private Long boardId;
+    @ManyToOne//post는 n이고 boardentity가 1
+    private BoardEntity board;//1:N 관계를 위해 수정, @으로 인해 해당 변수를 컬럼으로 인식, board + _id(뒤에 자동으로 붙음)
 
     private String userName;
 

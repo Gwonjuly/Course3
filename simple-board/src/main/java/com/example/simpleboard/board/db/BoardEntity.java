@@ -1,10 +1,10 @@
 package com.example.simpleboard.board.db;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.example.simpleboard.post.db.PostEntity;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,4 +25,10 @@ public class BoardEntity {
     private String boardName;
 
     private String status;
+
+    //@Transient
+    @OneToMany(// 1(boardEnity): N(PostEntity)
+            mappedBy = "board"//boardEntity는 PostEntity에 있어야 함, 즉, board select 시, 아래 post가 딸려 옴
+    )
+    private List<PostEntity> postList=List.of();//보드는 여러 개의 포스트를 가질 수 있음(board : post = 1 : N)
 }
