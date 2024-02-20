@@ -5,6 +5,8 @@ import com.example.simpleboard.board.db.BoardRepository;
 import com.example.simpleboard.board.model.BoardRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /*
 [서비스는 레파지토리를 주입 받음]
@@ -24,5 +26,10 @@ public class BoardService {
                 .status("REGISTERED")
                 .build();
         return boardRepository.save(entity);
+    }
+
+
+    public BoardEntity view(Long id) {
+        return boardRepository.findById(id).get();//id를 통해 select, .get()은 객체가 있다고 가정
     }
 }

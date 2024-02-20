@@ -30,4 +30,11 @@ public class BoardApiController {
     ){
         return boardService.create(boardRequest);
     }
+
+    @GetMapping("/id/{id}")
+    public BoardEntity view(
+            @PathVariable Long id
+    ){
+        return boardService.view(id);
+    }
 }
