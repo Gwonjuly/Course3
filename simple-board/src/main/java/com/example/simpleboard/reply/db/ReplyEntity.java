@@ -1,13 +1,9 @@
 package com.example.simpleboard.reply.db;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.simpleboard.post.db.PostEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.data.repository.cdi.Eager;
 
 import java.time.LocalDateTime;
@@ -23,7 +19,10 @@ public class ReplyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//primary key 설정
     private Long id;
 
-    private Long postId;
+    @ManyToOne//reply(N) : post(1)
+    @JsonIgnore//view 시, post와 reply의 무한루프 방지
+    @ToString.Exclude//view 시, post와 reply의 무한루프 방지
+    private PostEntity post;//자동으로 뒤에 _id 생성
 
     private String userName;
 
