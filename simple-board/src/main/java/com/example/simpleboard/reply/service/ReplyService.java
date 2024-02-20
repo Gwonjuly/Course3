@@ -19,9 +19,12 @@ public class ReplyService {
     private final PostRepository postRepository;
 
     public ReplyEntity create(ReplyRequest replyRequest){
-        var postEntity=postRepository.findById(replyRequest.getPostId()).get();//있다고 가정
+        var optionalPostEntity=postRepository.findById(replyRequest.getPostId());
+        if(optionalPostEntity.isEmpty()){
+            throw new RuntimeException("게시물이 존재하지 않습니다: "+replyRequest.getPostId());
+        }
         var entity=ReplyEntity.builder()
-                .post(postEntity)
+                .post(optionalPostEntity.get())
                 .userName(replyRequest.getUserName())
                 .password(replyRequest.getPassword())
                 .status("REGISTERED")

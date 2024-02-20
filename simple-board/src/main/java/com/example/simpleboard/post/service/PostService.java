@@ -19,7 +19,6 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final ReplyService replyService;//view for post + reply
     private final BoardRepository boardRepository;//boardId  받기 위해
 
     public PostEntity create(
@@ -55,10 +54,7 @@ public class PostService {
                         var format="패스워드가 맞지 않습니다. %s vs %s";
                         throw new RuntimeException(String.format(format,it.getPassword(),postViewRequest.getPassword()));
                     }
-                    //it(글) 있고 패스워도 맞는 경우
-                    //post를 view 할 때, reply가 registered인 경우 같이 답변도 같이 보이도록 수정
-                    var replylist=replyService.findAllByPostId(it.getId());
-                    it.setReplyList(replylist);
+                   //@OnetoMan을 통해 자동으로 postEntity에서 replyList 가져옴
                     return it;
                 }).orElseThrow(//it(글)가 없는 경우
                         ()->{return new RuntimeException("해당 글이 존재하지 않습니다.:"+postViewRequest.getPostId());}
