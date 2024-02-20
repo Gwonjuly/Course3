@@ -5,6 +5,7 @@ import com.example.simpleboard.board.model.BoardRequest;
 import com.example.simpleboard.board.service.BoardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 /*
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/board")
 @RequiredArgsConstructor//서비스를 주입 받음
+@Slf4j
 public class BoardApiController {
 
     private final BoardService boardService;
@@ -35,6 +37,8 @@ public class BoardApiController {
     public BoardEntity view(
             @PathVariable Long id
     ){
-        return boardService.view(id);
+        var entity=boardService.view(id);
+        log.info("result:{}",entity);
+        return entity;
     }
 }
