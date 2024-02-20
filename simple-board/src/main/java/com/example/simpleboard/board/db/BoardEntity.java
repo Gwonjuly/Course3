@@ -3,6 +3,7 @@ package com.example.simpleboard.board.db;
 import com.example.simpleboard.post.db.PostEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OrderBy;
 import org.hibernate.annotations.Where;
 
 import java.util.List;
@@ -32,5 +33,7 @@ public class BoardEntity {
             mappedBy = "board"//boardEntity는 PostEntity에 있어야 함, 즉, board select 시, 아래 post가 딸려 옴
     )
     @Where(clause = "status='REGISTERED'")//조건 추가: POST의 status가 registered인 것만 표시
+    @Builder.Default
+    @OrderBy(clause = "id desc")
     private List<PostEntity> postList=List.of();//보드는 여러 개의 포스트를 가질 수 있음(board : post = 1 : N)
 }

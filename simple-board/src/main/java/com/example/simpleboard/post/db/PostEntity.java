@@ -50,5 +50,6 @@ public class PostEntity {
     @OneToMany(
             mappedBy = "post"
     )
+    @Builder.Default
     private List<ReplyEntity> replyList= List.of();//post view 시, reply도 같이 보이도록(default로 빈 클래스를 지정한다는데, list.of는 null이 못 옴)
 }
