@@ -4,6 +4,7 @@ import com.example.simpleboard.post.db.PostEntity;
 import com.example.simpleboard.post.db.PostRepository;
 import com.example.simpleboard.post.model.PostRequest;
 import com.example.simpleboard.post.model.PostViewRequest;
+import com.example.simpleboard.reply.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final ReplyService replyService;//view for post + reply
 
     public PostEntity create(
             PostRequest postRequest
@@ -49,7 +51,11 @@ public class PostService {
                         var format="패스워드가 맞지 않습니다. %s vs %s";
                         throw new RuntimeException(String.format(format,it.getPassword(),postViewRequest.getPassword()));
                     }
-                    return it; //it(글) 있고 패스워도 맞는 경우
+                    //it(글) 있고 패스워도 맞는 경우
+                    //post를 view 할 때, reply가 registered인 경우 같이 답변도 같이 보이도록 수정
+                    var replylist=replyService.findAllByPostId(it.getId());
+                    it.setReplyList(replylist);
+                    return it;
                 }).orElseThrow(//it(글)가 없는 경우
                         ()->{return new RuntimeException("해당 글이 존재하지 않습니다.:"+postViewRequest.getPostId());}
                 );

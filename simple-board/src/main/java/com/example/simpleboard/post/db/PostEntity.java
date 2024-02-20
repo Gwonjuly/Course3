@@ -1,10 +1,13 @@
 package com.example.simpleboard.post.db;
 
+import com.example.simpleboard.reply.db.ReplyEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 /*@Getter
 @Setter
@@ -38,4 +41,6 @@ public class PostEntity {
 
     private LocalDateTime postedAt;
 
+    @Transient//post table의 column으로 사용하지 않음
+    private List<ReplyEntity> replyList= List.of();//post view 시, reply도 같이 보이도록(default로 빈 클래스를 지정한다는데, list.of는 null이 못 옴)
 }
