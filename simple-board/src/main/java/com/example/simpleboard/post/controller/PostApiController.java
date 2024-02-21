@@ -8,6 +8,7 @@ import com.example.simpleboard.post.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +42,7 @@ public class PostApiController {
     //http://localhost:8080/api/post/all?page=0&size=5 = 0번째 페이지에 5개의 엘리먼트(포스트)를 달라
     @GetMapping("/all")//쿼리
     public Api<List<PostEntity>> list(
-            @PageableDefault(page = 0, size = 10)
+            @PageableDefault(page = 0, size = 10,sort = "id",direction = Sort.Direction.DESC)//정렬 기준은 id, 최신(내림차순 정렬),기본 ASC(오름차순 정렬)
             Pageable pageable
     ){
         return postService.all(pageable);
