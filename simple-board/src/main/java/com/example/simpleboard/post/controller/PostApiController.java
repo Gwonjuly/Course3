@@ -1,11 +1,14 @@
 package com.example.simpleboard.post.controller;
 
+import com.example.simpleboard.common.Api;
 import com.example.simpleboard.post.db.PostEntity;
 import com.example.simpleboard.post.model.PostRequest;
 import com.example.simpleboard.post.model.PostViewRequest;
 import com.example.simpleboard.post.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,9 +38,13 @@ public class PostApiController {
         return postService.view(postViewRequest);//클릭한 게시글과 post_id가 있어야 하고 입력한 비밀번호가 일치해야 함
     }
 
-    @GetMapping("/all")
-    public List<PostEntity> list(){
-        return postService.all();
+    //http://localhost:8080/api/post/all?page=0&size=5 = 0번째 페이지에 5개의 엘리먼트(포스트)를 달라
+    @GetMapping("/all")//쿼리
+    public Api<List<PostEntity>> list(
+            @PageableDefault(page = 0, size = 10)
+            Pageable pageable
+    ){
+        return postService.all(pageable);
     }
 
     //@DeleteMapping("") 사용 불가: 비밀번호 입력 필요 -> post
