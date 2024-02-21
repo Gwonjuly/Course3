@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserApiController {
 
     @PostMapping("")
-    public void register(
-            /*@RequestBody
-            UserRequest userRequest*/
-            HttpEntity http
+    public UserRequest register(
+            @RequestBody
+            UserRequest userRequest
     ){
-        log.info("{}",http.getBody());
+        log.info("{}",userRequest);
+        return userRequest;
     }
 }
