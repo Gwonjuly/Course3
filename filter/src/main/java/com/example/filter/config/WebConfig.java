@@ -14,7 +14,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //WebMvcConfigurer.super.addInterceptors(registry);
-        registry.addInterceptor(openApiController)//pattern pass: 어떤 주소에 맵핑을 하겠다고 지정
-                .addPathPatterns("/**");//모든 주소 맵핑
+
+        //임시 interceptor 기능 해제
+        /*registry.addInterceptor(openApiController)//pattern pass: 어떤 주소에 맵핑을 하겠다고 지정
+                .addPathPatterns("/**");//모든 주소 맵핑*/
     }
 }

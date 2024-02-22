@@ -12,7 +12,7 @@ import org.springframework.web.util.ContentCachingResponseWrapper;
 
 import java.io.IOException;
 
-@Component//service와 같은 스프링 빈 주입 방식
+//@Component//service와 같은 스프링 빈 주입 방식, 임시 필터 기능 해제
 @Slf4j
 /*
 모든 요청과 응답은 필터를 지나가야 됨, 기준선은 chain.doFilter(request, response);
