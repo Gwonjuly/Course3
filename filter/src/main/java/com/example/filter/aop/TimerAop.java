@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 @Aspect//AOP를 정의하는 클래스에 할당됨
 @Component//스프링으로부터 관리 됨
-public class TimerAop {
+public class TimerAop {//AOP PCD(포인트 컷 지시자: within 사용)
     @Pointcut(value = "within(com.example.filter.controller.UserApiController)")//해당 컨트롤러가 가지고 있는 각각 메서드가 실행되는 전/후 시점 캐치,
     // "":pointcut을 실행시킬 위치
     public void timerPointCut(){}
