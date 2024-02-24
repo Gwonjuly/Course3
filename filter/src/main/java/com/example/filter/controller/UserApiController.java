@@ -17,7 +17,8 @@ public class UserApiController {
             UserRequest userRequest
     ){
         log.info("{}",userRequest);
-        return userRequest;
+        throw new NumberFormatException("");// @AfterThrowing 테스트를 위해 임의의 에러 발생
+        //return userRequest;
     }
 
     //openapi (x)

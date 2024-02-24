@@ -2,10 +2,9 @@ package com.example.filter.aop;
 
 import com.example.filter.model.UserRequest;
 import org.apache.catalina.User;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
@@ -16,10 +15,29 @@ import java.util.Arrays;
 public class TimerAop {
     @Pointcut(value = "within(com.example.filter.controller.UserApiController)")//해당 컨트롤러가 가지고 있는 각각 메서드가 실행되는 전/후 시점 캐치,
     // "":pointcut을 실행시킬 위치
-    public void timerPointCut(){
+    public void timerPointCut(){}
 
+    @Before(value = "timerPointCut()")//메서드가 실행되기 전 캐치
+    public void before(JoinPoint joinPoint){
+        System.out.println("@Before");
     }
-    @Around(value = "timerPointCut()")//timerPointCut을 사용해서 Around 적용
+
+    @After(value = "timerPointCut()")//메서드가 실행된 후  캐치
+    public void after(JoinPoint joinPoint){
+        System.out.println("@After");
+    }
+
+    @AfterReturning(value = "timerPointCut()", returning = "result")//메서드 호출 성공
+    public void afterReturning(JoinPoint joinPoint, Object result){
+        System.out.println("@AfterReturning");
+    }
+
+    @AfterThrowing(value = "timerPointCut()", throwing="ex")//메서드 호출 실패(예외 발생 시)
+    public void afterThrowing(JoinPoint joinPoint, Throwable ex){
+        System.out.println("@AfterThrowing");
+    }
+
+    @Around(value = "timerPointCut()")//timerPointCut을 사용해서 Around 적용, 위와 달리 예외 발생/미발생 둘 다 포함
     public void around(ProceedingJoinPoint joinPoint) throws Throwable {//pointcut을 지정한 위치
 
         System.out.println("메서드 실행 이전");
