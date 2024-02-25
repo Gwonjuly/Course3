@@ -27,7 +27,7 @@ public abstract class CRUDAbsService<DTO, ENTITY> implements CRUDinterface<DTO>{
     @Override
     public DTO create(DTO dto) {
         //dto -> entity
-        var entity=converter.toEtity(dto);
+        var entity=converter.toEntity(dto);
 
         //entity -> save
         jpaRepository.save(entity);
@@ -50,7 +50,7 @@ public abstract class CRUDAbsService<DTO, ENTITY> implements CRUDinterface<DTO>{
 
     @Override
     public DTO update(DTO dto) {
-        var entity=converter.toEtity(dto);
+        var entity=converter.toEntity(dto);
         jpaRepository.save(entity);
         return converter.toDto(entity);
     }
