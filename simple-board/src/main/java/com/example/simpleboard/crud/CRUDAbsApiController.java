@@ -36,7 +36,7 @@ public abstract class CRUDAbsApiController<DTO, ENTITY> implements CRUDinterface
         return crudAbsService.update(dto);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("")
     @Override
     public void delete(@PathVariable Long id) {
         crudAbsService.delete(id);

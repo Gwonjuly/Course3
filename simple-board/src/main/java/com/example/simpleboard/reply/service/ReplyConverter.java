@@ -7,6 +7,8 @@ import com.example.simpleboard.reply.model.ReplyDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class ReplyConverter implements Converter<ReplyDto, ReplyEntity> {
@@ -36,10 +38,10 @@ public class ReplyConverter implements Converter<ReplyDto, ReplyEntity> {
                 .post(postEntity.map(it->{return  it;}).orElseGet(()->null))//.map 없어도 됨
                 .userName(replyDto.getUserName())
                 .password(replyDto.getPassword())
-                .status(replyDto.getStatus())
+                .status(replyDto.getStatus()==null?"REGISTERED": replyDto.getStatus())
                 .title(replyDto.getTitle())
                 .content(replyDto.getContent())
-                .repliedAt(replyDto.getRepliedAt())
+                .repliedAt(replyDto.getRepliedAt()==null?LocalDateTime.now():replyDto.getRepliedAt())
                 .build();
         return entity;
     }
